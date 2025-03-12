@@ -6,6 +6,7 @@ import az.railway.model.*;
 import az.railway.service.impl.*;
 import az.railway.service.interf.*;
 import az.railway.utility.Utility;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
@@ -45,14 +46,14 @@ public class MainClass {
                                         StationService stationService = new StationServiceImpl(stationDao);
                                         Payment payment = new Payment();
                                         Ticket ticket = new Ticket();
-                                        Boolean isFlag = false;
+                                        boolean isFlag = false;
                                         List<Station> stationList = stationService.getStationList();
                                         stationList.forEach(System.out::println);
                                         System.out.print("From Where: ");
-                                        Long beginStationId = sc.nextLong();
+                                        long beginStationId = sc.nextLong();
                                         sc.nextLine();
                                         System.out.print("To Where: ");
-                                        Long endStationId = sc.nextLong();
+                                        long endStationId = sc.nextLong();
                                         sc.nextLine();
                                         String routeName = Utility.choiceRoute(beginStationId, endStationId);
                                         if (routeName == null || beginStationId == endStationId) {
@@ -62,7 +63,7 @@ public class MainClass {
                                         List<RouteClass> routeClassList = Utility.choiceClassOfRoute(routeName);
                                         routeClassList.forEach(System.out::println);
                                         System.out.println("Please select class of route by id: ");
-                                        Long routeId = sc.nextLong();
+                                        long routeId = sc.nextLong();
                                         sc.nextLine();
                                         for (RouteClass routeClass : routeClassList) {
                                             if (routeId == routeClass.getId()) {
@@ -96,7 +97,7 @@ public class MainClass {
                                         System.out.println("Please select Wagon by Id: ");
                                         Long wagonId = sc.nextLong();
                                         sc.nextLine();
-                                        Boolean isWagon = Utility.checkWagonId(wagonList, wagonId);
+                                        boolean isWagon = Utility.checkWagonId(wagonList, wagonId);
                                         if (!isWagon) {
                                             throw new IllegalArgumentException("Enter correct wagon id");
                                         }
@@ -108,7 +109,7 @@ public class MainClass {
                                         System.out.println("Please select Row by Id: ");
                                         Long rowId = sc.nextLong();
                                         sc.nextLine();
-                                        Boolean isRow = Utility.checkRowId(rowList, rowId);
+                                        boolean isRow = Utility.checkRowId(rowList, rowId);
                                         if (!isRow) {
                                             throw new IllegalArgumentException("Enter correct row id");
                                         }
@@ -120,7 +121,7 @@ public class MainClass {
                                         System.out.println("Please select Place by Id: ");
                                         Long placeId = sc.nextLong();
                                         sc.nextLine();
-                                        Boolean isPlace = Utility.checkPlaceId(placeList, placeId);
+                                        boolean isPlace = Utility.checkPlaceId(placeList, placeId);
                                         if (!isPlace) {
                                             throw new IllegalArgumentException("Enter correct Place id");
                                         }
@@ -175,7 +176,7 @@ public class MainClass {
                                         TicketDao ticketDao1 = new TicketDaoImpl();
                                         TicketService ticketService1 = new TicketServiceImpl(ticketDao1);
                                         List<Ticket> listTickets = ticketService1.getTicketList();
-                                        Boolean isTicket = false;
+                                        boolean isTicket = false;
                                         for (Ticket ticket1 : listTickets) {
                                             if (ticket1.getCustomer().getName().equals(mainCustomer.getName()) & ticket1.getCustomer().getSurname().equals(mainCustomer.getSurname())) {
                                                 isTicket = true;
@@ -422,12 +423,10 @@ public class MainClass {
                 default:
                     throw new IllegalArgumentException("Invalid choice");
             }
-        } catch (InputMismatchException ex) {
+        } catch (NullPointerException | InputMismatchException ex) {
             System.err.println("Enter correctly!");
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-        } catch (NullPointerException ex) {
-            System.err.println("Enter correctly!");
         } catch (Exception ex) {
             System.err.println("Something went wrong");
         }

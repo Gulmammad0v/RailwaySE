@@ -18,7 +18,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> getCustomerList() throws Exception {
         String sql = SelectConstant.GET_CUSTOMER_LIST;
         List<Customer> listCustomer = new ArrayList<>();
-        try (Connection c = DbHelper.getConnection(); PreparedStatement ps = c.prepareStatement(sql); ResultSet rs = ps.executeQuery();) {
+        try (Connection c = DbHelper.getConnection(); PreparedStatement ps = c.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Customer customer = new Customer();
                 customer.setId(rs.getLong("ID"));
