@@ -9,7 +9,6 @@ public class DbHelper {
     public static Connection getConnection() throws Exception {
         Properties p = new Properties();
         p.load(new FileReader("config.properties"));
-        Connection c = DriverManager.getConnection(p.getProperty("db.url"), p.getProperty("db.username"), p.getProperty("db.password"));
-        return c;
+        return DriverManager.getConnection(p.getProperty("db.url"), p.getProperty("db.username"), p.getProperty("db.password"));
     }
 }

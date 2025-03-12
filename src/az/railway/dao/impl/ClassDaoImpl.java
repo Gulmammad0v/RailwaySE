@@ -18,7 +18,7 @@ public class ClassDaoImpl implements ClassDao {
     public List<Class> getClassList() throws Exception {
         String sql = SelectConstant.GET_CLASS_LIST;
         List<Class> listClass = new ArrayList<>();
-        try (Connection c = DbHelper.getConnection(); PreparedStatement ps = c.prepareStatement(sql); ResultSet rs = ps.executeQuery();) {
+        try (Connection c = DbHelper.getConnection(); PreparedStatement ps = c.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Class clas = new Class();
                 clas.setId(rs.getLong("ID"));
